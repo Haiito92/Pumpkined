@@ -1,0 +1,34 @@
+{
+    "name": "AntoineTestKeyMap",
+    "maps": [
+        {
+            "name": "TestControls",
+            "id": "ffff919b-2a9c-4683-a1d1-25992fa27f4a",
+            "actions": [
+                {
+                    "name": "TestAction",
+                    "type": "Button",
+                    "id": "73943f19-a7af-48df-b654-7843033f65c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b585288e-f436-4715-bfc2-2f94ddd9795b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TestAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
