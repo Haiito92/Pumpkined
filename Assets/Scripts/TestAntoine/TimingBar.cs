@@ -8,19 +8,24 @@ public class TimingBar : MonoBehaviour
 {
     //Fields
     [SerializeField] float _maxValue = 100;
-    [SerializeField] float _currentValue;
+    float _currentValue;
 
     float _fillingValue = 0.1f;
-    [SerializeField] float _fillingSpeed = 1f;
+    float _fillingTickSpeed = 0.01f;
     [SerializeField] float _fillingTime = 10f;
 
     bool _canDoAction = false;
 
     //Coroutines
-    Coroutine _setFill;
+    Coroutine _fillingCoroutine;
 
     //References
     [SerializeField] Image _fill;
+
+    #region Properties
+    public bool CanDoAction { get => _canDoAction; set => _canDoAction = value; }
+    #endregion
+
 
     private void Awake()
     {
@@ -30,7 +35,7 @@ public class TimingBar : MonoBehaviour
 
     private void Start()
     {
-        _setFill = StartCoroutine(FillingCoroutine());
+        StartFillingCoroutine();
     }
 
     private void Update()
@@ -38,9 +43,9 @@ public class TimingBar : MonoBehaviour
         _fill.fillAmount = _currentValue / _maxValue;
     }
 
-    public void DoAction(InputAction.CallbackContext ctx)
+    public void DoAction()
     {
-        if(ctx.started && _canDoAction)
+        if(_canDoAction)
         {
             Debug.Log("Do Action");
             _canDoAction = false;
@@ -48,16 +53,21 @@ public class TimingBar : MonoBehaviour
         }
     }
 
-    public IEnumerator FillingCoroutine()
+    void StartFillingCoroutine()
+    {
+        _fillingCoroutine = StartCoroutine(FillingCoroutine());
+    }
+
+    IEnumerator FillingCoroutine()
     {
         while (true)
         {
             Debug.Log("Fill");
-            _fillingValue = (_maxValue / _fillingTime) * _fillingSpeed;
+            _fillingValue = (_maxValue / _fillingTime) * _fillingTickSpeed;
             while (!_canDoAction)
             {
                 _currentValue = Mathf.Clamp(_currentValue + _fillingValue, 0, _maxValue);
-                yield return new WaitForSeconds(_fillingSpeed);
+                yield return new WaitForSeconds(_fillingTickSpeed);
                 if (_currentValue >= _maxValue)
                 {
                     _canDoAction = true;
@@ -71,7 +81,7 @@ public class TimingBar : MonoBehaviour
 
     void StopFillingCoroutine()
     {
-        StopCoroutine(_setFill);
+        StopCoroutine(_fillingCoroutine);
     }
 
 }
