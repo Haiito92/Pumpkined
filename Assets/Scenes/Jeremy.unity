@@ -609,6 +609,8 @@ GameObject:
   - component: {fileID: 980290574}
   - component: {fileID: 980290573}
   - component: {fileID: 980290577}
+  - component: {fileID: 980290579}
+  - component: {fileID: 980290578}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Untagged
@@ -716,7 +718,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: a349809e72484384db1da23302b959d7, type: 2}
   _target: {fileID: 1199873347}
-  animator: {fileID: 0}
+  animator: {fileID: 980290579}
+  Health: 0
+--- !u!114 &980290578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980290572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1517a966e171b394cb0c5fec4979423d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &980290579
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980290572}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 048a4a974983a9b44a0ae0079193519a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1199873347
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,6 +876,7 @@ MonoBehaviour:
   _stats: {fileID: 11400000, guid: a349809e72484384db1da23302b959d7, type: 2}
   _target: {fileID: 980290572}
   animator: {fileID: 1199873353}
+  Health: 0
 --- !u!95 &1199873353
 Animator:
   serializedVersion: 5

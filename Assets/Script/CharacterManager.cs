@@ -13,13 +13,15 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private int Health;
 
     public bool CanAttack { get => canAttack; set => canAttack = value; }
+    public CharacterManager TargetStats { get => targetStats; set => targetStats = value; }
+    public GameObject Target { get => _target; set => _target = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         CanAttack = false;
-        targetStats = _target.GetComponent<CharacterManager>();
+        TargetStats = Target.GetComponent<CharacterManager>();
     }
 
     private void Update()
@@ -29,11 +31,11 @@ public class CharacterManager : MonoBehaviour
 
     private void Changetarget(GameObject newTarget)
     {
-        _target = newTarget;
-        targetStats = _target.GetComponent<CharacterManager>();
+        Target = newTarget;
+        TargetStats = Target.GetComponent<CharacterManager>();
     }
     private void DealDamage()
     {
-        targetStats._stats.health -= _stats.damage;
+        TargetStats._stats.health -= _stats.damage;
     }
 }

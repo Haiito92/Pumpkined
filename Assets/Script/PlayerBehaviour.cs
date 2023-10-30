@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     private CharacterManager charManager;
+    private bool canBlock;
+
+    public bool CanBlock { get => canBlock; set => canBlock = value; }
 
     void Start()
     {
@@ -18,8 +21,15 @@ public class PlayerBehaviour : MonoBehaviour
         {
             charManager.CanAttack = true;
         }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (CanBlock)
+            {
+
+            }
+        }
         if (charManager.CanAttack)
-        {;
+        {
             charManager.animator.SetTrigger("Attack");
             charManager.CanAttack = false;
         }
