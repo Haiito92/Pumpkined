@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnnemyBehaviour : MonoBehaviour
 {
     private CharacterManager charManager;
-
+    [SerializeField] private PlayerBehaviour targetPlayer;
     private bool isBlock;
 
     public bool IsBlock { get => isBlock; set => isBlock = value; }
@@ -15,7 +15,9 @@ public class EnnemyBehaviour : MonoBehaviour
         charManager = GetComponent<CharacterManager>();
         charManager.animator = GetComponent<Animator>();
         IsBlock = false;
+        targetPlayer = charManager.Target.GetComponent<PlayerBehaviour>();
         StartCoroutine(EnnemyAttackCooldown());
+        targetPlayer._ennemyCounterCallback += Counter;
     }
 
     void Update()
@@ -38,4 +40,10 @@ public class EnnemyBehaviour : MonoBehaviour
     {
         charManager.Target.GetComponent<PlayerBehaviour>().CanBlock = !charManager.Target.GetComponent<PlayerBehaviour>().CanBlock;
     }
+    void Counter()
+    {
+        charManager.animator.SetTrigger("Counter");
+        charManager.Target.GetComponent<PlayerBehaviour>().CanBlock = false;
+    }
+
 }

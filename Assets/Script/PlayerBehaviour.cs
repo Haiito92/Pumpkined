@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     private CharacterManager charManager;
-    private bool canBlock;
+    [SerializeField] private bool canBlock;
+    public delegate void EnnemyCounter();
+    public EnnemyCounter _ennemyCounterCallback;
 
     public bool CanBlock { get => canBlock; set => canBlock = value; }
 
@@ -13,19 +15,13 @@ public class PlayerBehaviour : MonoBehaviour
     {
         charManager = GetComponent<CharacterManager>();
     }
-
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            charManager.CanAttack = true;
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
             if (CanBlock)
             {
-
+                _ennemyCounterCallback?.Invoke();
             }
         }
         if (charManager.CanAttack)
