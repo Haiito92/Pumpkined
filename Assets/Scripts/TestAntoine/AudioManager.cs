@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -19,6 +21,11 @@ public class AudioManager : MonoBehaviour
 
     //SFX
 
+    //Menu SFX
+    [Header("Menu Sounds")]
+    [Space]
+    [SerializeField] Sound[] _menuSounds;
+
     //Singleton
     private static AudioManager _instance;
     public static AudioManager Instance => _instance;
@@ -33,20 +40,30 @@ public class AudioManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        foreach(Sound sound in _menuSounds)
+        {
+            sound.Source = this.AddComponent<AudioSource>();
+            sound.Source.clip = sound.Clip;
+            sound.Source.outputAudioMixerGroup = sound.OutputAudioMixerGroup;
+            sound.Source.loop = sound.Loop;
+            sound.Source.volume = sound.Volume;
+            sound.Source.pitch = sound.Pitch;
+        }
     }
 
     private void Start()
     {
         _musicSource.clip = _musicClips[0];
-        _musicSource.Play();
+        //_musicSource.Play();
     }
 
     private void Update()
     {
-        if (!_musicSource.isPlaying)
-        {
-            PlayNextMusic();
-        }
+        //if (!_musicSource.isPlaying)
+        //{
+        //    PlayNextMusic();
+        //}
 
     }
 
@@ -103,6 +120,22 @@ public class AudioManager : MonoBehaviour
         Destroy(tempGo, clip.length);
     }
 
+    ////////////////////////
+    // Menu SFX Functions //
+    ////////////////////////
+
+    public void PlayMenuSFX(string name)
+    {
+        foreach(Sound sound in _menuSounds)
+        {
+            if(sound.Name == name)
+            {
+                sound.Source.Play();
+                return;
+            }
+        }
+    }
+
     /////////////////////////////
     // Settings Menu Functions //
     /////////////////////////////
@@ -120,5 +153,10 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         _audioMixer.SetFloat("SFXVolume", volume);
+    }
+
+    public void SetMenuSFXVolume(float volume)
+    {
+        _audioMixer.SetFloat("MenuSFX", volume);
     }
 }
