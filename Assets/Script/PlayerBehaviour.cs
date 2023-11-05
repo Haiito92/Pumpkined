@@ -6,28 +6,53 @@ public class PlayerBehaviour : MonoBehaviour
 {
     private CharacterManager charManager;
     [SerializeField] private bool canBlock;
+    private bool allowToBlock;
     public delegate void EnnemyCounter();
     public EnnemyCounter _ennemyCounterCallback;
+    private TimingBar _timingBar;
+    [SerializeField] private GameObject _canvas;
 
     public bool CanBlock { get => canBlock; set => canBlock = value; }
+    public bool AllowToBlock { get => allowToBlock; set => allowToBlock = value; }
 
     void Start()
     {
         charManager = GetComponent<CharacterManager>();
+        _timingBar = GetComponent<TimingBar>();
+        AllowToBlock = false;
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (AllowToBlock)
         {
-            if (CanBlock)
+            _canvas.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                _ennemyCounterCallback?.Invoke();
+                if (CanBlock)
+                {
+                    _ennemyCounterCallback?.Invoke();
+                }
+            }
+            if (_timingBar.CanDoAction)
+            {
+
+                _timingBar.DoAction();
+                _canvas.SetActive(true);
+                AllowToBlock = false;
             }
         }
+
         if (charManager.CanAttack)
         {
-            charManager.animator.SetTrigger("Attack");
-            charManager.CanAttack = false;
+            _canvas.SetActive(false);
+            if (_timingBar.CanDoAction)
+            {
+                _timingBar.DoAction();
+                charManager.animator.SetTrigger("Attack");
+                charManager.CanAttack = false;
+                _canvas.SetActive(true);
+            }
+
         }
     }
 }

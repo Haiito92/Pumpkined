@@ -6,6 +6,7 @@ public class EnnemyBehaviour : MonoBehaviour
 {
     private CharacterManager charManager;
     [SerializeField] private PlayerBehaviour targetPlayer;
+    [SerializeField] private float _cooldown;
     private bool isBlock;
 
     public bool IsBlock { get => isBlock; set => isBlock = value; }
@@ -32,7 +33,7 @@ public class EnnemyBehaviour : MonoBehaviour
 
     IEnumerator EnnemyAttackCooldown()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(_cooldown);
         charManager.CanAttack = true;
     }
 
