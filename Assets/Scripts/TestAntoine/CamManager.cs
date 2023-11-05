@@ -32,12 +32,23 @@ public class CamManager : MonoBehaviour
         _cams[_camIndex].Priority = 11;
     }
 
-    public void ChangeCam()
+    public void NextCam()
     {
         _cams[_camIndex].Priority = 9;
         _camIndex = (_camIndex + 1) % _cams.Length;
         _cams[_camIndex].Priority = 11;
     }
+
+    public void ChangeToCam(int index)
+    {
+        foreach(CinemachineVirtualCamera cam in _cams) 
+        {
+            cam.Priority = 9;
+        }
+        _cams[index].Priority = 11;
+    }
+
+
 
     //public void NextDollyCam()
     //{
