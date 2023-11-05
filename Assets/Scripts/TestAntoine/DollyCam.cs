@@ -4,6 +4,6 @@ public class DollyCam : MonoBehaviour
 {
     public void CamTrigger()
     {
-        CamManager.Instance.NextDollyCam();
+        //CamManager.Instance.NextDollyCam();
     }
 }

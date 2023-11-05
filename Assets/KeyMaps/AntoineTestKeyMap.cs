@@ -44,6 +44,15 @@ public partial class @AntoineTestKeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestChangeCam"",
+                    ""type"": ""Button"",
+                    ""id"": ""60227d05-9751-4836-bf51-3ae97d5fffd0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @AntoineTestKeyMap: IInputActionCollection2, IDisposable
                     ""action"": ""TestEmitSound"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99ed3301-4ce6-415d-87fe-91e8f88ee21b"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestChangeCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @AntoineTestKeyMap: IInputActionCollection2, IDisposable
         m_TestControls = asset.FindActionMap("TestControls", throwIfNotFound: true);
         m_TestControls_TestAction = m_TestControls.FindAction("TestAction", throwIfNotFound: true);
         m_TestControls_TestEmitSound = m_TestControls.FindAction("TestEmitSound", throwIfNotFound: true);
+        m_TestControls_TestChangeCam = m_TestControls.FindAction("TestChangeCam", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +162,14 @@ public partial class @AntoineTestKeyMap: IInputActionCollection2, IDisposable
     private List<ITestControlsActions> m_TestControlsActionsCallbackInterfaces = new List<ITestControlsActions>();
     private readonly InputAction m_TestControls_TestAction;
     private readonly InputAction m_TestControls_TestEmitSound;
+    private readonly InputAction m_TestControls_TestChangeCam;
     public struct TestControlsActions
     {
         private @AntoineTestKeyMap m_Wrapper;
         public TestControlsActions(@AntoineTestKeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @TestAction => m_Wrapper.m_TestControls_TestAction;
         public InputAction @TestEmitSound => m_Wrapper.m_TestControls_TestEmitSound;
+        public InputAction @TestChangeCam => m_Wrapper.m_TestControls_TestChangeCam;
         public InputActionMap Get() { return m_Wrapper.m_TestControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +185,9 @@ public partial class @AntoineTestKeyMap: IInputActionCollection2, IDisposable
             @TestEmitSound.started += instance.OnTestEmitSound;
             @TestEmitSound.performed += instance.OnTestEmitSound;
             @TestEmitSound.canceled += instance.OnTestEmitSound;
+            @TestChangeCam.started += instance.OnTestChangeCam;
+            @TestChangeCam.performed += instance.OnTestChangeCam;
+            @TestChangeCam.canceled += instance.OnTestChangeCam;
         }
 
         private void UnregisterCallbacks(ITestControlsActions instance)
@@ -172,6 +198,9 @@ public partial class @AntoineTestKeyMap: IInputActionCollection2, IDisposable
             @TestEmitSound.started -= instance.OnTestEmitSound;
             @TestEmitSound.performed -= instance.OnTestEmitSound;
             @TestEmitSound.canceled -= instance.OnTestEmitSound;
+            @TestChangeCam.started -= instance.OnTestChangeCam;
+            @TestChangeCam.performed -= instance.OnTestChangeCam;
+            @TestChangeCam.canceled -= instance.OnTestChangeCam;
         }
 
         public void RemoveCallbacks(ITestControlsActions instance)
@@ -193,5 +222,6 @@ public partial class @AntoineTestKeyMap: IInputActionCollection2, IDisposable
     {
         void OnTestAction(InputAction.CallbackContext context);
         void OnTestEmitSound(InputAction.CallbackContext context);
+        void OnTestChangeCam(InputAction.CallbackContext context);
     }
 }

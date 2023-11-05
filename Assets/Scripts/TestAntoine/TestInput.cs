@@ -27,4 +27,12 @@ public class TestInput : MonoBehaviour
             _soundEmitter.EmitSound();
         }
     }
+
+    public void ChangeCam(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+        {
+            CamManager.Instance.ChangeCam();
+        }
+    }
 }

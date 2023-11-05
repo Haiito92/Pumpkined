@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class CamManager : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera[] _dollyCams;
+    //[SerializeField] CinemachineVirtualCamera[] _dollyCams;
+    [SerializeField] CinemachineVirtualCamera[] _cams;
     int _camIndex = 0;
 
     private static CamManager _instance;
@@ -22,13 +23,26 @@ public class CamManager : MonoBehaviour
 
     private void Start()
     {
-        _dollyCams[0].gameObject.SetActive(true);
+        //_dollyCams[0].gameObject.SetActive(true);
+        foreach(CinemachineVirtualCamera cam in _cams) 
+        {
+            cam.Priority = 9;
+        }
+        _camIndex = 0;
+        _cams[_camIndex].Priority = 11;
     }
 
-    public void NextDollyCam()
+    public void ChangeCam()
     {
-        _dollyCams[_camIndex].gameObject.SetActive(false);
-        _camIndex = (_camIndex + 1 ) % _dollyCams.Length;
-        _dollyCams[_camIndex].gameObject.SetActive(true);
+        _cams[_camIndex].Priority = 9;
+        _camIndex = (_camIndex + 1) % _cams.Length;
+        _cams[_camIndex].Priority = 11;
     }
+
+    //public void NextDollyCam()
+    //{
+    //    _dollyCams[_camIndex].gameObject.SetActive(false);
+    //    _camIndex = (_camIndex + 1 ) % _dollyCams.Length;
+    //    _dollyCams[_camIndex].gameObject.SetActive(true);
+    //}
 }
