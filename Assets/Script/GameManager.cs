@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,10 +24,19 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         PauseGame();
+        _winScreen.SetActive(true);
     }
 
     public void LoseGame()
     {
         PauseGame();
+        _loseScreen.SetActive(true);
+    }
+
+    public void ChangeScene(string name)
+    {
+        _winScreen.SetActive(false);
+        _loseScreen.SetActive(false);
+        SceneManager.LoadScene(name);
     }
 }
