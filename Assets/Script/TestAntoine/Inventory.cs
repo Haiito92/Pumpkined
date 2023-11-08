@@ -5,18 +5,33 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] List<HealingPotion> _healingPotions = new List<HealingPotion>();
+    CharacterManager _player;
+    TimingBar _playerTimingBar;
 
-
-    //Fields created to make the script function, but have to be replaced by the real fields
-    int _playerHealth;
+    private void Awake()
+    {
+        _player = GetComponent<CharacterManager>();
+        _playerTimingBar = GetComponent<TimingBar>();
+    }
 
     public void UseHealingPotion()
     {
-        //Use last potion in the list
-        _playerHealth += _healingPotions[_healingPotions.Count - 1].HealingAmount;
+        if (_playerTimingBar.CanDoAction)
+        {
+            _playerTimingBar.DoAction();
 
-        //Remove the last potion in the list
-        _healingPotions.RemoveAt(_healingPotions.Count - 1);
+            //Use last potion in the list
+            _player.Heal(_healingPotions[_healingPotions.Count - 1].HealingAmount);
+
+            //Remove the last potion in the list
+            _healingPotions.RemoveAt(_healingPotions.Count - 1);
+
+        }
+        else
+        {
+            //Say to player "Can"t do action"
+            Debug.Log("Peux pas heal");
+        }
     }
 
 }

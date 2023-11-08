@@ -6,6 +6,7 @@ using UnityEngine;
 public class soStats : ScriptableObject
 {
     public int health;
+    public int maxHealth;
     public int damage;
     public string statName;
 }

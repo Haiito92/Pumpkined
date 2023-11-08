@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5866729f57319a43a940047858e5f3f, type: 3}
   m_Name: Ennemy
   m_EditorClassIdentifier: 
-  health: 50
+  health: 100
+  maxHealth: 100
   damage: 5
   statName: Ennemy
