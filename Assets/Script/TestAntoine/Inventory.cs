@@ -14,9 +14,17 @@ public class Inventory : MonoBehaviour
         _playerTimingBar = GetComponent<TimingBar>();
     }
 
+    private void Start()
+    {
+        HealingPotion hp = new HealingPotion();
+        _healingPotions.Add(hp);
+        _healingPotions.Add(hp);
+        _healingPotions.Add(hp);
+    }
+
     public void UseHealingPotion()
     {
-        if (_playerTimingBar.CanDoAction)
+        if (_playerTimingBar.CanDoAction && _healingPotions.Count > 0)
         {
             _playerTimingBar.DoAction();
 

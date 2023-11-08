@@ -9,7 +9,7 @@ public class SoundEmitter : MonoBehaviour
 
     public void EmitSound()
     {
-        //AudioManager.Instance.PlaySFX(_source, _clip);
-        AudioManager.Instance.PlaySFXAtPos(_clip, transform.position);
+        AudioManager.Instance.PlaySFX(_source, _clip);
+        //AudioManager.Instance.PlaySFXAtPos(_clip, transform.position); nique ta grosse mere la pouissance
     }
 }

@@ -24,6 +24,7 @@ public class TimingBar : MonoBehaviour
 
     #region Properties
     public bool CanDoAction { get => _canDoAction; set => _canDoAction = value; }
+    public float FillingTime { get => _fillingTime; set => _fillingTime = value; }
     #endregion
 
 
@@ -63,7 +64,7 @@ public class TimingBar : MonoBehaviour
         while (true)
         {
             Debug.Log("Fill");
-            _fillingValue = (_maxValue / _fillingTime) * _fillingTickSpeed;
+            _fillingValue = (_maxValue / FillingTime) * _fillingTickSpeed;
             while (!_canDoAction)
             {
                 _currentValue = Mathf.Clamp(_currentValue + _fillingValue, 0, _maxValue);
