@@ -55,6 +55,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         _musicSource.clip = _musicClips[0];
+        _musicIndex = 0;
         _musicSource.Play();
     }
 
