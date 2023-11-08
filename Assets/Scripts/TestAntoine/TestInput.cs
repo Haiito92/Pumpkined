@@ -32,7 +32,7 @@ public class TestInput : MonoBehaviour
     {
         if(ctx.started)
         {
-            CamManager.Instance.ChangeCam();
+            CamManager.Instance.NextCam();
         }
     }
 }
