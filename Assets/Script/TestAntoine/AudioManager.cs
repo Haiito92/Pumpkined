@@ -157,6 +157,6 @@ public class AudioManager : MonoBehaviour
 
     public void SetMenuSFXVolume(float volume)
     {
-        _audioMixer.SetFloat("MenuSFX", volume);
+        _audioMixer.SetFloat("MenuSFXVolume", volume);
     }
 }
