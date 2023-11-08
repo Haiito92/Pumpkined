@@ -55,15 +55,15 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         _musicSource.clip = _musicClips[0];
-        //_musicSource.Play();
+        _musicSource.Play();
     }
 
     private void Update()
     {
-        //if (!_musicSource.isPlaying)
-        //{
-        //    PlayNextMusic();
-        //}
+        if (!_musicSource.isPlaying)
+        {
+            PlayNextMusic();
+        }
 
     }
 
