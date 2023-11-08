@@ -8,6 +8,7 @@ public class EnnemyBehaviour : MonoBehaviour
     [SerializeField] private PlayerBehaviour targetPlayer;
     [SerializeField] private float _cooldown;
     private bool isBlock;
+    private TimingBar _timingBar;
 
     public bool IsBlock { get => isBlock; set => isBlock = value; }
 
@@ -17,26 +18,22 @@ public class EnnemyBehaviour : MonoBehaviour
         charManager.animator = GetComponent<Animator>();
         IsBlock = false;
         targetPlayer = charManager.Target.GetComponent<PlayerBehaviour>();
-        StartCoroutine(EnnemyAttackCooldown());
         targetPlayer._ennemyCounterCallback += Counter;
+        _timingBar = GetComponent<TimingBar>();
+        _timingBar.FillingTime = _cooldown;
+        charManager.CanAttack = true;
     }
 
     void Update()
     {
-        if (charManager.CanAttack)
+        if (_timingBar.CanDoAction)
         {
-            charManager.CanAttack = false;
+            charManager.CanAttack = true;
+            _timingBar.DoAction();
             charManager.animator.SetTrigger("Attack");
-            StartCoroutine(EnnemyAttackCooldown());
+            charManager.CanAttack = false;
         }
     }
-
-    IEnumerator EnnemyAttackCooldown()
-    {
-        yield return new WaitForSeconds(_cooldown);
-        charManager.CanAttack = true;
-    }
-
     void PlayerDef()
     {
         charManager.Target.GetComponent<PlayerBehaviour>().CanBlock = !charManager.Target.GetComponent<PlayerBehaviour>().CanBlock;

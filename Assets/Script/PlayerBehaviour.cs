@@ -20,6 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
         charManager = GetComponent<CharacterManager>();
         _timingBar = GetComponent<TimingBar>();
         AllowToBlock = false;
+        charManager.CanAttack = false;
     }
     void Update()
     {

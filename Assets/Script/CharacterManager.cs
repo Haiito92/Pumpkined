@@ -23,7 +23,6 @@ public class CharacterManager : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        CanAttack = false;
         TargetStats = Target.GetComponent<CharacterManager>();
         _stats.health = _stats.maxHealth;
     }
