@@ -1,0 +1,74 @@
+{
+    "name": "AntoineTestKeyMap",
+    "maps": [
+        {
+            "name": "TestControls",
+            "id": "ffff919b-2a9c-4683-a1d1-25992fa27f4a",
+            "actions": [
+                {
+                    "name": "TestAction",
+                    "type": "Button",
+                    "id": "73943f19-a7af-48df-b654-7843033f65c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TestEmitSound",
+                    "type": "Button",
+                    "id": "e2b58f7c-ada3-496b-ad5e-653bdaee8153",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TestChangeCam",
+                    "type": "Button",
+                    "id": "60227d05-9751-4836-bf51-3ae97d5fffd0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b585288e-f436-4715-bfc2-2f94ddd9795b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TestAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db116761-b0e5-4b08-a24a-06254e8e2b9e",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TestEmitSound",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "99ed3301-4ce6-415d-87fe-91e8f88ee21b",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TestChangeCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
