@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnnemyBehaviour : MonoBehaviour
@@ -42,6 +43,11 @@ public class EnnemyBehaviour : MonoBehaviour
     {
         charManager.animator.SetTrigger("Counter");
         charManager.Target.GetComponent<PlayerBehaviour>().CanBlock = false;
+    }
+
+    public void Die()
+    {
+        GameManager.Instance.WinGame();
     }
 
 }

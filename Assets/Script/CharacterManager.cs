@@ -42,11 +42,27 @@ public class CharacterManager : MonoBehaviour
         //TargetStats._stats.health -= _stats.damage;
         TargetStats._stats.health = Mathf.Clamp(TargetStats._stats.health - _stats.damage, 0, TargetStats._stats.maxHealth);
         TargetStats.HealthBar.SetFill(TargetStats._stats.health, TargetStats._stats.maxHealth);
+        if(TargetStats._stats.health <= 0)
+        {
+            TargetStats.Die();
+        }
     }
 
     public void Heal(int amount)
     {
         _stats.health = Mathf.Clamp(_stats.health + amount, 0, _stats.maxHealth);
         _healthBar.SetFill(_stats.health, _stats.maxHealth);
+    }
+
+    public void Die()
+    {
+        if(TargetStats.GetComponent<EnnemyBehaviour>() != null)
+        {
+            TargetStats.GetComponent<EnnemyBehaviour>().Die();
+        }
+        else if(TargetStats.GetComponent<PlayerBehaviour>() != null)
+        {
+            TargetStats.GetComponent<PlayerBehaviour>().Die();
+        }
     }
 }
