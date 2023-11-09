@@ -10,6 +10,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject _winScreen;
     [SerializeField] GameObject _loseScreen;
+    private void Awake()
+    {
+        if( _instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        } 
+        else
+        {
+            _instance = this;
+        }
+    }
 
     public void ResumeGame()
     {

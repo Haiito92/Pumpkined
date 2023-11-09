@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -30,6 +31,8 @@ public class AudioManager : MonoBehaviour
     private static AudioManager _instance;
     public static AudioManager Instance => _instance;
 
+    Coroutine _c;
+
     private void Awake()
     {
         if(_instance != null && _instance != this)
@@ -57,15 +60,18 @@ public class AudioManager : MonoBehaviour
         _musicSource.clip = _musicClips[0];
         _musicIndex = 0;
         _musicSource.Play();
+        _c = StartCoroutine(SongL());
     }
 
     private void Update()
     {
-        if (!_musicSource.isPlaying)
-        {
-            PlayNextMusic();
-        }
+        
+    }
 
+    IEnumerator SongL()
+    {
+        yield return new WaitForSeconds(_musicSource.clip.length);
+        PlayNextMusic();
     }
 
     /////////////////////
@@ -74,9 +80,11 @@ public class AudioManager : MonoBehaviour
 
     void PlayNextMusic()
     {
+        StopCoroutine(_c);
         _musicIndex = (_musicIndex + 1)% _musicClips.Length;
         _musicSource.clip = _musicClips[_musicIndex];
         _musicSource.Play();
+        _c = StartCoroutine(SongL());
     }
 
     ///////////////////

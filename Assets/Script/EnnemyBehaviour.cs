@@ -47,7 +47,7 @@ public class EnnemyBehaviour : MonoBehaviour
 
     public void Die()
     {
-        GameManager.Instance.WinGame();
+        GameManager.Instance.LoseGame();
     }
 
 }

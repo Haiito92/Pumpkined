@@ -11,7 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
     public EnnemyCounter _ennemyCounterCallback;
     private TimingBar _timingBar;
     [SerializeField] private GameObject _canvas;
-
+    [SerializeField] private GameObject _canvasForDef;
     public bool CanBlock { get => canBlock; set => canBlock = value; }
     public bool AllowToBlock { get => allowToBlock; set => allowToBlock = value; }
 
@@ -27,12 +27,17 @@ public class PlayerBehaviour : MonoBehaviour
         if (AllowToBlock)
         {
             _canvas.SetActive(false);
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (canBlock)
             {
-                if (CanBlock)
+                _canvasForDef.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     _ennemyCounterCallback?.Invoke();
                 }
+            }
+            if (!canBlock)
+            {
+                _canvasForDef.SetActive(false);
             }
             if (_timingBar.CanDoAction)
             {
@@ -59,6 +64,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void Die()
     {
-        GameManager.Instance.LoseGame();
+        GameManager.Instance.WinGame();
     }
 }
